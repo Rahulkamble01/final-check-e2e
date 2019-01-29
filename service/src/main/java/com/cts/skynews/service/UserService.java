@@ -26,7 +26,7 @@ public class UserService {
 		LOGGER.debug("Email Id from client :  {}", user.getEmail());
 
 		User actualUserEmail = userDao.findUserByEmail(user.getEmail());
-
+		LOGGER.debug("actualUserEmail Object :  {}", actualUserEmail);
 		if (actualUserEmail != null) {
 			LOGGER.info("Email Already Exists");
 			signUpStatus.setEmailExists(true);
@@ -41,34 +41,30 @@ public class UserService {
 		return signUpStatus;
 	}
 
-	public AuthenticationStatus login(User user) {
-		LOGGER.info("START : Inside login() method of UserService");
+	public AuthenticationStatus loginUser(User user) {
+		LOGGER.info("START : Inside loginUser() method of UserService");
 		LOGGER.debug("User Object :  {}", user);
 		String userEmail = user.getEmail();
 		String userPasssword = user.getPassword();
-
+		LOGGER.debug("User Email : {} ", userEmail + " User Passowrd :  {}", userPasssword);
 		AuthenticationStatus status = new AuthenticationStatus();
 		status.setAuthenticated(false);
-		status.setAdmin(false);
-		status.setAccountStatus(false);
+
 		User actualUser = userDao.findUserByEmail(userEmail);
 
 		if (actualUser != null) {
 			String actualPassword = actualUser.getPassword();
 			String actualEmail = actualUser.getEmail();
+			LOGGER.debug("Actual Email : {} ", actualEmail + "Actual Passowrd :  {}", actualPassword);
 
 			if (actualPassword.equals(userPasssword) && userEmail.equals(actualEmail)) {
 				status.setAuthenticated(true);
+				status.setActualUser(actualUser);
+				LOGGER.info("Login Successfull");
 			}
 
-			if (status.isAuthenticated() && actualUser.getRole().getDescription().equals("admin")) {
-				status.setAdmin(true);
-			}
-
-			if (status.isAuthenticated() && actualUser.getStatus().equals("active")) {
-				status.setAccountStatus(true);
-			}
 		}
+		LOGGER.info("END : loginUser() method of UserService");
 		return status;
 	}
 }

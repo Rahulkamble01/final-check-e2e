@@ -3,8 +3,8 @@ package com.cts.skynews.bean;
 public class AuthenticationStatus {
 
 	private boolean authenticated;
-	private boolean isAdmin;
-	private boolean accountStatus;
+	
+	private User actualUser;
 
 	public boolean isAuthenticated() {
 		return authenticated;
@@ -14,26 +14,39 @@ public class AuthenticationStatus {
 		this.authenticated = authenticated;
 	}
 
-	public boolean isAdmin() {
-		return isAdmin;
+	public User getActualUser() {
+		return actualUser;
 	}
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
-	public boolean isAccountStatus() {
-		return accountStatus;
-	}
-
-	public void setAccountStatus(boolean accountStatus) {
-		this.accountStatus = accountStatus;
+	public void setActualUser(User user) {
+		this.actualUser = actualUser;
 	}
 
 	@Override
 	public String toString() {
-		return "AuthenticationStatus [authenticated=" + authenticated + ", isAdmin=" + isAdmin + ", accountStatus="
-				+ accountStatus + "]";
+		return "AuthenticationStatus [authenticated=" + authenticated + ", actualUser=" + actualUser + "]";
 	}
 
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AuthenticationStatus other = (AuthenticationStatus) obj;
+		if (actualUser == null) {
+			if (other.actualUser != null)
+				return false;
+		} else if (!actualUser.equals(other.actualUser))
+			return false;
+		if (authenticated != other.authenticated)
+			return false;
+		return true;
+	}
+
+	
+	
 }

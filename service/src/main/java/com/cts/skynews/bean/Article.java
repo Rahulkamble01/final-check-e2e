@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "article")
@@ -28,11 +29,17 @@ public class Article {
 	@Column(name = "ar_url")
 	private String url;
 
-	@Column(name = "ar_urlToImage")
+	@Column(name = "ar_urltoimage")
 	private String urlToImage;
 
-	@Column(name = "ar_publishedAt")
+	@Column(name = "ar_publishedat")
 	private String publishedAt;
+	
+	@Column(name = "ar_content")
+	private String content;
+	
+	@Transient
+	private String email;
 
 	public int getId() {
 		return id;
@@ -69,6 +76,16 @@ public class Article {
 	public String getUrl() {
 		return url;
 	}
+	
+	
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public void setUrl(String url) {
 		this.url = url;
@@ -89,5 +106,22 @@ public class Article {
 	public void setPublishedAt(String publishedAt) {
 		this.publishedAt = publishedAt;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", author=" + author + ", title=" + title + ", description=" + description
+				+ ", url=" + url + ", urlToImage=" + urlToImage + ", publishedAt=" + publishedAt + ", content="
+				+ content + ", email=" + email + "]";
+	}
+	
+	
 
 }

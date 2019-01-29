@@ -8,14 +8,8 @@
         </header>
         <div class="card-body">
 
-          <form>
+          <form [formGroup]="login">
             <div class="form-row">
-              <div *ngIf="signedUp" class="col form-group alert alert-success" role="alert">
-                User Signup Successfull
-              </div>
-              <div *ngIf="emailExists" class="col form-group alert alert-danger" role="alert">
-                Email already exist.
-              </div>
               <div *ngIf="error" class="col form-group alert alert-danger" role="alert">
                 User Signup not Successfull.
               </div>
@@ -25,7 +19,7 @@
             <div class="form-group">
               <label>Email Address</label>
               <input type="email" class="form-control" placeholder="" formControlName="email">
-              <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+              
             </div> <!-- form-group end.// -->
 
 
@@ -34,7 +28,7 @@
               <input class="form-control" type="password" formControlName="password">
             </div> <!-- form-group end.// -->
             <div class="form-group">
-              <button type="submit" (click)="OnSubmit();" class="btn btn-primary btn-block signup-btn float-right">Login</button>
+              <button type="submit" (click)="Login();" class="btn btn-primary btn-block signup-btn float-right">Login</button>
             </div> <!-- form-group// -->
 
           </form>
@@ -42,7 +36,7 @@
           <br> <br>
           <div class="form-group">
             <label class="text-center">Don't have an Account? Sign Up for Free</label>&nbsp; &nbsp;
-            <button type="button" class="btn btn-primary signup-btn" data-toggle="modal" data-target="#signupmodal">
+            <button type="button" (click)="getLanguages();"class="btn btn-primary signup-btn" data-toggle="modal" data-target="#signupmodal">
               Sign Up </button>
           </div>
         </div> <!-- card-body end .// -->
@@ -62,17 +56,54 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Sing Up</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form [formGroup]="signup"> 
+          <div class="form-row">
+            <div *ngIf="signedUp" class="col form-group alert alert-success" role="alert">
+              User Signup Successfull
+            </div>
+            <div *ngIf="emailExists" class="col form-group alert alert-danger" role="alert">
+              Email already exist.
+            </div>
+            <div *ngIf="error" class="col form-group alert alert-danger" role="alert">
+              User Signup not Successfull.
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Name </label>
+              <input type="text" class="form-control" placeholder="" formControlName="name">
+            </div> <!-- form-group end.// -->
+
+          </div> <!-- form-row end.// -->
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-control" placeholder="" formControlName="email">
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div> <!-- form-group end.// -->
+
+
+          <div class="form-group">
+            <label>Create password</label>
+            <input class="form-control" type="password" formControlName="password">
+          </div>
+          <div class="form-group">
+              <label>Select Language</label>
+             <select class="form-control" formControlName="language">
+               <option *ngFor="let language of languageList"  [value]="language.id">{{language.description}}</option>
+             </select>
+            </div> <!-- form-group end.// -->
+          <div class="form-group">
+            <button type="submit" (click)="Signup();" class="btn btn-success btn-block"> Sign Up </button>
+          </div> <!-- form-group// -->
+
+        </form>
       </div>
     </div>
   </div>

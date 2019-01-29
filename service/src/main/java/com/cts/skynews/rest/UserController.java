@@ -15,7 +15,7 @@ import com.cts.skynews.service.UserService;
 
 @RequestMapping("/user")
 @RestController
-public class UserController {
+public class UserController  extends SkyNewsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
@@ -29,11 +29,11 @@ public class UserController {
 		return userService.addUser(user);
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping("/login")
 	public AuthenticationStatus login(@RequestBody User user) {
 		LOGGER.info("START : Inside addUser() method of UserController");
 		LOGGER.debug("User Object :  {}", user);
 
-		return userService.login(user);
+		return userService.loginUser(user);
 	}
 }

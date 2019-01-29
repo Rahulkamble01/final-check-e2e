@@ -27,18 +27,18 @@ public class User {
 	private int id;
 
 	@NotNull(message = "Name cannot be empty")
-	@Size(min = 3, max = 80, message = "Name must be 3 to 45 characters")
+	@Size(min = 3, max = 80, message = "Name must be 3 to 80 characters")
 	@Column(name = "us_name")
 	private String name;
 
 	@NotNull(message = "Email cannot be empty")
-	@Size(min = 4, max = 80, message = "Email must be 4 to 70 characters")
+	@Size(min = 4, max = 80, message = "Email must be 4 to 80 characters")
 	@Pattern(regexp = ".+@.+\\..+", message = "Email address is invalid")
 	@Column(name = "us_email")
 	private String email;
 
 	@NotNull(message = "Password cannot be empty")
-	@Size(min = 6, max = 45, message = "Password must be 6 to 16 characters")
+	@Size(min = 6, max = 45, message = "Password must be 6 to 45 characters")
 	@Column(name = "us_password")
 	private String password;
 	
@@ -46,10 +46,12 @@ public class User {
 	@Column(name = "us_status")
 	private String status;
 	
+	@NotNull(message = "Role cannot be empty")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ro_id")
 	private Role role;
 	
+	@NotNull(message = "Language cannot be empty")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_la_id")
 	private Language language;

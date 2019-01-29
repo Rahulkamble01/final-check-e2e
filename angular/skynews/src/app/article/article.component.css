@@ -1,0 +1,10 @@
+.col-display{
+    display: flex;
+}
+.favourite-unmarked{
+    font-size: 23px;
+}
+.favourite-marked{
+    color:red;
+    font-size: 23px;
+}
