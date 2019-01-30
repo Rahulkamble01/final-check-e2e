@@ -18,6 +18,7 @@ import com.cts.skynews.bean.AuthenticationStatus;
 import com.cts.skynews.bean.SignUpStatus;
 import com.cts.skynews.bean.User;
 import com.cts.skynews.dao.UserDao;
+import com.cts.skynews.repository.UserRepository;
 import com.cts.skynews.service.UserService;
 
 public class UserServiceTest {
@@ -25,7 +26,8 @@ public class UserServiceTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceTest.class);
 
 	@Mock
-	UserDao mockedUserDao;
+	UserRepository mockedUserRepository;
+	// UserDao mockedUserDao;
 
 	@InjectMocks
 	UserService service;
@@ -42,7 +44,7 @@ public class UserServiceTest {
 		User user = new User();
 		user.setEmail("kiran@gmail.com");
 		LOGGER.debug("User Object :  {}", user);
-		when(mockedUserDao.findUserByEmail(user.getEmail())).thenReturn(null);
+		when(mockedUserRepository.findUserByEmail(user.getEmail())).thenReturn(null);
 
 		SignUpStatus expectedStatus = new SignUpStatus(true, false);
 		SignUpStatus actualStatus = service.addUser(user);
@@ -51,8 +53,8 @@ public class UserServiceTest {
 		LOGGER.debug("Actual  Output :  {}", actualStatus);
 
 		Assert.assertEquals(true, expectedStatus.equals(actualStatus));
-		verify(mockedUserDao, times(1)).save(Mockito.any(User.class));
-		verify(mockedUserDao, times(1)).findUserByEmail(user.getEmail());
+		verify(mockedUserRepository, times(1)).save(Mockito.any(User.class));
+		verify(mockedUserRepository, times(1)).findUserByEmail(user.getEmail());
 
 		LOGGER.info("End : Unit Testing addUser() method of UserServiceTest");
 	}
@@ -63,7 +65,7 @@ public class UserServiceTest {
 		User user = new User();
 		user.setEmail("kiran@gmail.com");
 		LOGGER.debug("User Object :  {}", user);
-		when(mockedUserDao.findUserByEmail(user.getEmail())).thenReturn(user);
+		when(mockedUserRepository.findUserByEmail(user.getEmail())).thenReturn(user);
 
 		SignUpStatus expectedStatus = new SignUpStatus(false, true);
 		SignUpStatus actualStatus = service.addUser(user);
@@ -72,8 +74,8 @@ public class UserServiceTest {
 		LOGGER.debug("Actual  Output :  {}", actualStatus);
 
 		Assert.assertEquals(true, expectedStatus.equals(actualStatus));
-		verify(mockedUserDao, times(0)).save(Mockito.any(User.class));
-		verify(mockedUserDao, times(1)).findUserByEmail(user.getEmail());
+		verify(mockedUserRepository, times(0)).save(Mockito.any(User.class));
+		verify(mockedUserRepository, times(1)).findUserByEmail(user.getEmail());
 
 		LOGGER.info("End : Unit Testing addUser() method of UserServiceTest");
 	}
@@ -85,7 +87,7 @@ public class UserServiceTest {
 		user.setEmail("kiran@gmail.com");
 		user.setPassword("123456");
 		LOGGER.debug("User Object :  {}", user);
-		when(mockedUserDao.findUserByEmail(user.getEmail())).thenReturn(user);
+		when(mockedUserRepository.findUserByEmail(user.getEmail())).thenReturn(user);
 
 		AuthenticationStatus expectedStatus = new AuthenticationStatus();
 		expectedStatus.setAuthenticated(true);
@@ -96,8 +98,8 @@ public class UserServiceTest {
 		LOGGER.debug("Actual  Output :  {}", actualStatus);
 
 		Assert.assertEquals(true, expectedStatus.equals(actualStatus));
-		verify(mockedUserDao, times(0)).save(Mockito.any(User.class));
-		verify(mockedUserDao, times(1)).findUserByEmail(user.getEmail());
+		verify(mockedUserRepository, times(0)).save(Mockito.any(User.class));
+		verify(mockedUserRepository, times(1)).findUserByEmail(user.getEmail());
 
 		LOGGER.info("End : Unit Testing addUser() method of UserServiceTest");
 	}
@@ -118,7 +120,7 @@ public class UserServiceTest {
 		actualUser.setEmail("kiran.com");
 		actualUser.setPassword("123456");
 
-		when(mockedUserDao.findUserByEmail(user.getEmail())).thenReturn(actualUser);
+		when(mockedUserRepository.findUserByEmail(user.getEmail())).thenReturn(actualUser);
 
 		AuthenticationStatus actualStatus = service.loginUser(user);
 
@@ -127,7 +129,7 @@ public class UserServiceTest {
 
 		Assert.assertEquals(true, expectedStatus.equals(actualStatus));
 		
-		verify(mockedUserDao, times(1)).findUserByEmail(user.getEmail());
+		verify(mockedUserRepository, times(1)).findUserByEmail(user.getEmail());
 
 		LOGGER.info("End : Unit Testing addUser() method of UserServiceTest");
 	}
@@ -148,7 +150,7 @@ public class UserServiceTest {
 		actualUser.setEmail("kiran@gmail.com");
 		actualUser.setPassword("1256");
 
-		when(mockedUserDao.findUserByEmail(user.getEmail())).thenReturn(actualUser);
+		when(mockedUserRepository.findUserByEmail(user.getEmail())).thenReturn(actualUser);
 
 		AuthenticationStatus actualStatus = service.loginUser(user);
 
@@ -157,7 +159,7 @@ public class UserServiceTest {
 
 		Assert.assertEquals(true, expectedStatus.equals(actualStatus));
 		
-		verify(mockedUserDao, times(1)).findUserByEmail(user.getEmail());
+		verify(mockedUserRepository, times(1)).findUserByEmail(user.getEmail());
 
 		LOGGER.info("End : Unit Testing addUser() method of UserServiceTest");
 	}

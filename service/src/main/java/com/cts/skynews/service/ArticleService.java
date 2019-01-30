@@ -10,46 +10,76 @@ import org.springframework.stereotype.Service;
 import com.cts.skynews.bean.Article;
 import com.cts.skynews.bean.ArticleStatus;
 import com.cts.skynews.bean.User;
-import com.cts.skynews.dao.ArticleDao;
-import com.cts.skynews.dao.UserDao;
-
-
+import com.cts.skynews.repository.ArticleRepository;
+import com.cts.skynews.repository.UserRepository;
 
 @Service
 public class ArticleService {
 
 	@Autowired
-	private ArticleDao articleDao;
-	
+	private ArticleRepository articleRepository;
+	// private ArticleDao articleDao;
+
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
+	// private UserDao userDao;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class);
 
-	@SuppressWarnings("unchecked")
+	
 	public ArticleStatus saveArticle(Article article) {
 		LOGGER.info("START : Inside saveArticle() method of UserService");
 		LOGGER.debug("Article Object :  {}", article);
 		ArticleStatus status = new ArticleStatus();
 		status.setSaved(false);
 		status.setArticleExists(false);
+		status.setMarkedFavourite(false);
 
-		Article actualArticle = articleDao.findArticleByTitle(article.getTitle());
+		Article actualArticle = articleRepository.findArticleByTitle(article.getTitle());
 
 		if (actualArticle != null) {
 			status.setArticleExists(true);
 			LOGGER.info("Article Exists !!");
 		}
+		// Save the article to DB and Mark as Favorite.
 		if (!status.isArticleExists()) {
-			articleDao.save(article);
-								
-			User user = userDao.findUserByEmail(article.getEmail());
+			articleRepository.save(article);
+			LOGGER.info("Article is Saved !!");
+			User user = userRepository.findUserByEmail(article.getEmail());
+			LOGGER.debug("User Object : {}", user);
 			user.getArticles().add(article);
-			userDao.save(user);
+			LOGGER.info("Added to List of article now Saving as Favourite !!");
+			userRepository.save(user);
 			status.setSaved(true);
-			LOGGER.info("Article Saved !!");
-			
+			status.setMarkedFavourite(true);
+			LOGGER.info("Article Marrked as Favourite !!");
+
 		}
+		// If article is already present then mark as favorite only if it is
+		// never been marked by that user.
+		if (status.isArticleExists()) {
+			User user = userRepository.findUserByEmail(article.getEmail());
+			LOGGER.debug("User Object : {}", user);
+			List<Article> articleList = user.getArticles();
+			if (articleList.size() > 0) {
+				LOGGER.info("Few articles are there checking if it is already marked!!");
+				for (Article existingArticle : articleList) {
+					if (existingArticle.getTitle().equals(actualArticle.getTitle())) {
+						status.setMarkedFavourite(true);
+						LOGGER.info("Article is already marked as Favourite !!");
+						return status;
+					}
+				}
+			} else {
+				LOGGER.info("Article is never  marked as Favourite By this User!!");
+				user.getArticles().add(actualArticle);
+				LOGGER.info("Added to List of article now Saving as Favourite !!");
+				userRepository.save(user);
+				status.setMarkedFavourite(true);
+				LOGGER.info("Article Marrked as Favourite !!");
+			}
+		}
+		LOGGER.info("--------------------------------- !!");
 		return status;
 	}
 }

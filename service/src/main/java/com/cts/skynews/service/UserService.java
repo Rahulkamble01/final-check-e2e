@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.skynews.bean.AuthenticationStatus;
+import com.cts.skynews.bean.BlockStatus;
 import com.cts.skynews.bean.SignUpStatus;
 import com.cts.skynews.bean.User;
-import com.cts.skynews.dao.UserDao;
+import com.cts.skynews.repository.UserRepository;
 
 @Service
 public class UserService {
+	
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userRepository;
+	//private UserDao userDao;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
@@ -25,7 +28,7 @@ public class UserService {
 		signUpStatus.setSignedUp(false);
 		LOGGER.debug("Email Id from client :  {}", user.getEmail());
 
-		User actualUserEmail = userDao.findUserByEmail(user.getEmail());
+		User actualUserEmail = userRepository.findUserByEmail(user.getEmail());
 		LOGGER.debug("actualUserEmail Object :  {}", actualUserEmail);
 		if (actualUserEmail != null) {
 			LOGGER.info("Email Already Exists");
@@ -33,7 +36,7 @@ public class UserService {
 		}
 
 		if (!signUpStatus.isEmailExists()) {
-			userDao.save(user);
+			userRepository.save(user);
 			signUpStatus.setSignedUp(true);
 			LOGGER.info("User Signed Up ");
 		}
@@ -50,7 +53,7 @@ public class UserService {
 		AuthenticationStatus status = new AuthenticationStatus();
 		status.setAuthenticated(false);
 
-		User actualUser = userDao.findUserByEmail(userEmail);
+		User actualUser = userRepository.findUserByEmail(userEmail);
 
 		if (actualUser != null) {
 			String actualPassword = actualUser.getPassword();
@@ -60,11 +63,35 @@ public class UserService {
 			if (actualPassword.equals(userPasssword) && userEmail.equals(actualEmail)) {
 				status.setAuthenticated(true);
 				status.setActualUser(actualUser);
+				LOGGER.debug("Actual User Object {}",actualUser);
 				LOGGER.info("Login Successfull");
 			}
 
 		}
 		LOGGER.info("END : loginUser() method of UserService");
+		return status;
+	}
+	
+	public BlockStatus blockUser(String emailId) {
+		LOGGER.info("START : Inside blockUser() method of UserService");
+		LOGGER.debug("EmailId  :  {}", emailId);
+		BlockStatus status = new BlockStatus();
+		status.setBlocked(false);
+		
+		LOGGER.debug("Email Id from client :  {}", emailId);
+
+		User user = userRepository.findUserByEmail(emailId);
+		LOGGER.debug("actualUserEmail Object :  {}", user);
+		if (user == null) {
+			LOGGER.info("Email Invalid ");
+			status.setMessage("Invalid Email Id");
+		}else{
+			user.setStatus("blocked");
+			userRepository.save(user);
+			status.setBlocked(true);
+			LOGGER.info("User Blocked  ");
+		}
+
 		return status;
 	}
 }

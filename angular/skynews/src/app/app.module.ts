@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
+import { FavouriteArticleComponent } from './favourite-article/favourite-article.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ArticleComponent,
-    HeaderComponent
+    HeaderComponent,
+    FavouriteArticleComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ public class Role {
 	@Column(name = "ro_id")
 	private int id;
 
-	@Column(name = "ro_role")
+	@Column(name = "ro_description")
 	private String description;
 
 	public int getId() {

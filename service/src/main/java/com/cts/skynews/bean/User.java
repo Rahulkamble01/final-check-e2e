@@ -18,8 +18,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Proxy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "user")
+// @Proxy(lazy = false)
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,18 +53,19 @@ public class User {
 	private String status;
 	
 	@NotNull(message = "Role cannot be empty")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_ro_id")
 	private Role role;
 	
 	@NotNull(message = "Language cannot be empty")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "us_la_id")
 	private Language language;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinTable(name = "user_favourite_article", joinColumns = { @JoinColumn(name = "fa_us_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "fa_ar_id") })
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})	
 	private List<Article> articles;
 
 	public int getId() {
@@ -124,7 +131,13 @@ public class User {
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
-	
+
+//	@Override
+//	public String toString() {
+//		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", status="
+//				+ status + ", role=" + role + ", language=" + language + ", articles=" + articles + "]";
+//	}
+//	
 	
 	
 	

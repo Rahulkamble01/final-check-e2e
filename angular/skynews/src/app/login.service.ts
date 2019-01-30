@@ -17,6 +17,7 @@ const httpOptions = {
 export class LoginService {
 
   genereateTokenUrl = environment.serviceUrlPrefix + '/token';
+  userLoginUrl = environment.serviceUrlPrefix + '/user/login';
 
   constructor(private http: HttpClient) { }
 
@@ -25,4 +26,7 @@ export class LoginService {
     return this.http.post(this.genereateTokenUrl, tokenData, httpOptions);
   }
 
+  loginUser(userData): Observable<any> {
+    return this.http.post(this.userLoginUrl, userData, httpOptions);
+  }
 }

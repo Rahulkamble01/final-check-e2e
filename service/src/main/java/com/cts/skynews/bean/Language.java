@@ -18,6 +18,9 @@ public class Language {
 
 	@Column(name = "la_language")
 	private String description;
+	
+	@Column(name = "la_code")
+	private String code;
 
 	public int getId() {
 		return id;
@@ -33,6 +36,16 @@ public class Language {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override

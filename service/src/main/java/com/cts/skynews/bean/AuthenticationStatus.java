@@ -18,7 +18,7 @@ public class AuthenticationStatus {
 		return actualUser;
 	}
 
-	public void setActualUser(User user) {
+	public void setActualUser(User actualUser) {
 		this.actualUser = actualUser;
 	}
 

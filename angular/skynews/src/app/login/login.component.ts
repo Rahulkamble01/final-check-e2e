@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { SignupService } from '../signup.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +30,11 @@ export class LoginComponent implements OnInit {
   json: any;
   languageList: any;
   signUpUserJson: any;
-  constructor(private loginService: LoginService, private signUpService: SignupService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private loginService: LoginService, private signUpService: SignupService, private router: Router,private service : AuthService) { }
 
   ngOnInit() {
+
   }
 
   getLanguages() {
@@ -39,6 +43,20 @@ export class LoginComponent implements OnInit {
       console.log(this.languageList);
     });
 
+  }
+
+  Login() {
+    this.loginService.loginUser(this.login.value).subscribe(data => {
+      console.log(data);
+      if (data.authenticated) {
+        this.service.login(data.actualUser);
+        this.service.setUserData(data.actualUser);
+        this.service.setLanguageCode(data.actualUser.language.code);
+        console.log(data.actualUser.language.code);
+
+        this.router.navigate(['/article']);
+      }
+    });
   }
 
   Signup() {

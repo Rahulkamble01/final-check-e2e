@@ -33,7 +33,7 @@ public class UserDao {
 		Session session = sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) session.createQuery("from User u where u.email = :email")
-				.setParameter("email", email).list();
+				.setParameter("email", email).getResultList();
 		if (users.size() > 0) {
 			user = users.get(0);
 			LOGGER.debug("User object {}", user);

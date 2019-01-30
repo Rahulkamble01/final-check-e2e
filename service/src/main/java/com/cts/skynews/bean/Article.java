@@ -1,10 +1,15 @@
 package com.cts.skynews.bean;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -34,10 +39,13 @@ public class Article {
 
 	@Column(name = "ar_publishedat")
 	private String publishedAt;
-	
+
 	@Column(name = "ar_content")
 	private String content;
-	
+
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articles")
+//	private List<User> users;
+
 	@Transient
 	private String email;
 
@@ -76,8 +84,6 @@ public class Article {
 	public String getUrl() {
 		return url;
 	}
-	
-	
 
 	public String getContent() {
 		return content;
@@ -121,7 +127,5 @@ public class Article {
 				+ ", url=" + url + ", urlToImage=" + urlToImage + ", publishedAt=" + publishedAt + ", content="
 				+ content + ", email=" + email + "]";
 	}
-	
-	
 
 }
