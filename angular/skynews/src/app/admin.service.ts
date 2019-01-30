@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class AdminService {
 
-  blockAnalystURL = environment.serviceUrlPrefix + '/admin/block';
+  blockAnalystURL = environment.serviceUrlPrefix + '/user/block';
 
   constructor(private http: HttpClient) { }
 
