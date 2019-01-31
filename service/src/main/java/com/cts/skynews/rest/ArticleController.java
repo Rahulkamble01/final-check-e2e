@@ -32,10 +32,18 @@ public class ArticleController {
 	}
 	
 	
+	
 	@GetMapping("/fetchfavArticle/{emailId}")
 	public User saveArticle(@PathVariable String emailId){
 		LOGGER.info("START : Inside saveArticle() method of ArticleController");
 		LOGGER.debug("Email Id : {}",emailId);
 		return articleService.fetchAllFavArticles(emailId);
+	}
+	
+	@PostMapping("/remove")
+	public void removeFavArticle(@RequestBody Article article){
+		LOGGER.info("START : Inside saveArticle() method of ArticleController");
+		LOGGER.debug("Aricle Object {}",article);
+		 articleService.reomveFavouredMark(article);
 	}
 }

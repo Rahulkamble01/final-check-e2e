@@ -27,7 +27,7 @@ public class ArticleService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class);
 
 	public ArticleStatus saveArticle(Article article) {
-		LOGGER.info("START : Inside saveArticle() method of UserService");
+		LOGGER.info("START : Inside saveArticle() method of ArticleService");
 		LOGGER.debug("Article Object :  {}", article);
 		ArticleStatus status = new ArticleStatus();
 		status.setSaved(false);
@@ -67,6 +67,14 @@ public class ArticleService {
 						status.setMarkedFavourite(true);
 						LOGGER.info("Article is already marked as Favourite !!");
 						return status;
+					} else {
+						LOGGER.info("Article is never  marked as Favourite By this User!!");
+						user.getArticles().add(actualArticle);
+						LOGGER.info("Added to List of article now Saving as Favourite !!");
+						userRepository.save(user);
+						status.setMarkedFavourite(true);
+						LOGGER.info("Article Marrked as Favourite !!");
+						return status;
 					}
 				}
 			} else {
@@ -83,9 +91,25 @@ public class ArticleService {
 	}
 
 	public User fetchAllFavArticles(String emailId) {
-		LOGGER.info("START : Inside fetchAllFavArticles() method of UserService");
+		LOGGER.info("START : Inside fetchAllFavArticles() method of ArticleService");
 		LOGGER.debug("Email Id:  {}", emailId);
-		LOGGER.info("END : Inside fetchAllFavArticles() method of UserService");
+		LOGGER.info("END : Inside fetchAllFavArticles() method of ArticleService");
 		return userRepository.findUserByEmail(emailId);
+	}
+
+	public void reomveFavouredMark(Article article) {
+		LOGGER.info("START : Inside reomveFavouredMark() method of ArticleService");
+		LOGGER.debug("Article Object :  {}", article);
+		User user = userRepository.findUserByEmail(article.getEmail());
+		LOGGER.debug("user Object :  {}", user);
+		List<Article> articles = user.getArticles();
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.listIterator().next().getTitle().equals(article.getTitle())) {
+				articles.remove(i);
+				break;
+			}
+		}
+		userRepository.save(user);
+		LOGGER.debug("After Saving user Object :  {}", user);
 	}
 }

@@ -92,6 +92,9 @@ export class LoginComponent implements OnInit {
     this.signUpService.addUser(this.signUpUserJson).subscribe(data => {
       this.signUpStatus = data;
       this.signedUp = this.signUpStatus.signedUp;
+      if (this.signedUp) {
+        this.signup.reset();
+      }
       this.emailExists = this.signUpStatus.emailExists;
     },
       error => {

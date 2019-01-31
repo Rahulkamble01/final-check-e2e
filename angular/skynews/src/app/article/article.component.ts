@@ -11,6 +11,7 @@ import { JsonPipe } from '@angular/common';
 export class ArticleComponent implements OnInit {
   // b6bfe2b91aa3400b9cc2bfe02a54bb08
   articlesResult: any;
+  searchArticlesResult: any;
   markedFavourite: boolean;
   mode: string;
   favoriteArticleStatus: any = [];
@@ -74,8 +75,8 @@ export class ArticleComponent implements OnInit {
   }
 
   SearchNews(keyword) {
-    this.searchedKeyWord = keyword;
     this.mode = 'search';
+    this.searchedKeyWord = keyword;
     const NewsAPI = require('newsapi');
     const newsapi = new NewsAPI('b6bfe2b91aa3400b9cc2bfe02a54bb08');
 
@@ -86,9 +87,9 @@ export class ArticleComponent implements OnInit {
       sortBy: 'relevancy',
     }).then(response => {
       console.log(response);
-      this.articlesResult = response.articles;
+      this.searchArticlesResult = response.articles;
       this.searchFavoriteArticleStatus = [];
-      for (let i = 0; i <= this.articlesResult.length; i++) {
+      for (let i = 0; i <= this.searchArticlesResult.length; i++) {
         this.searchFavoriteArticleStatus.push(0);
       }
     });
