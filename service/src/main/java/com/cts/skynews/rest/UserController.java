@@ -3,6 +3,7 @@ package com.cts.skynews.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,11 +40,19 @@ public class UserController  extends SkyNewsController {
 		return userService.loginUser(user);
 	}
 	
-	@PostMapping("/block/{emailId}")
-	public BlockStatus blockUser(@PathVariable String emailid) {
+	@GetMapping("/search/{emailId}")
+	public User serachUserByEmail(@PathVariable String emailId) {
+		LOGGER.info("START : Inside serachUserByEmail() method of UserController");
+		LOGGER.debug("EmailId :  {}", emailId);
+		LOGGER.info("END : Inside serachUserByEmail() method of UserController");
+		return userService.findUserByEmail(emailId);
+	}
+	
+	@PostMapping("/block")
+	public BlockStatus blockUser(@RequestBody User user) {
 		LOGGER.info("START : Inside blockUser() method of UserController");
-		LOGGER.debug("EmailId :  {}", emailid);
-
-		return userService.blockUser(emailid);
+		LOGGER.debug("User :  {}", user);
+		LOGGER.info("END : Inside blockUser() method of UserController");
+		return userService.blockUser(user);
 	}
 }

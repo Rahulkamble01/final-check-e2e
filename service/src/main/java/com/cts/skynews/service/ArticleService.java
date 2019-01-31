@@ -26,7 +26,6 @@ public class ArticleService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class);
 
-	
 	public ArticleStatus saveArticle(Article article) {
 		LOGGER.info("START : Inside saveArticle() method of UserService");
 		LOGGER.debug("Article Object :  {}", article);
@@ -81,5 +80,12 @@ public class ArticleService {
 		}
 		LOGGER.info("--------------------------------- !!");
 		return status;
+	}
+
+	public User fetchAllFavArticles(String emailId) {
+		LOGGER.info("START : Inside fetchAllFavArticles() method of UserService");
+		LOGGER.debug("Email Id:  {}", emailId);
+		LOGGER.info("END : Inside fetchAllFavArticles() method of UserService");
+		return userRepository.findUserByEmail(emailId);
 	}
 }

@@ -16,9 +16,9 @@ CREATE  TABLE IF NOT EXISTS `skynews`.`article` (
   `ar_author` VARCHAR(45) NULL ,
   `ar_title` VARCHAR(450) NOT NULL ,
   `ar_description` VARCHAR(450) NOT NULL ,
-  `ar_url` VARCHAR(250) NOT NULL ,
-  `ar_urlToImage` VARCHAR(250) NOT NULL ,
-  `ar_publishedAt` VARCHAR(45) NULL ,
+  `ar_url` VARCHAR(500) NOT NULL ,
+  `ar_urltoimage` VARCHAR(500) NOT NULL ,
+  `ar_publishedat` VARCHAR(45) NULL ,
   `ar_content` VARCHAR(1000) NOT NULL ,
   PRIMARY KEY (`ar_id`) ,
   UNIQUE INDEX `ar_title_UNIQUE` (`ar_title` ASC) )
@@ -46,7 +46,9 @@ DROP TABLE IF EXISTS `skynews`.`language` ;
 CREATE  TABLE IF NOT EXISTS `skynews`.`language` (
   `la_id` INT NOT NULL AUTO_INCREMENT ,
   `la_language` VARCHAR(50) NULL ,
-  PRIMARY KEY (`la_id`) )
+  `la_code` VARCHAR(4) NULL ,
+  PRIMARY KEY (`la_id`) ,
+  UNIQUE INDEX `la_language_UNIQUE` (`la_language` ASC) )
 ENGINE = InnoDB;
 
 

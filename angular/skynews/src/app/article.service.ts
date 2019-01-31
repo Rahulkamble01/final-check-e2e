@@ -16,13 +16,19 @@ const httpOptions = {
 export class ArticleService {
 
   addArticleUrl = environment.serviceUrlPrefix + '/article/save';
+  fetchfavArticleUrl = environment.serviceUrlPrefix + '/article/fetchfavArticle/';
 
   constructor(private http: HttpClient) { }
-
-
 
   markFavourite(articleData): Observable<any> {
     return this.http.post(this.addArticleUrl, articleData, httpOptions);
   }
+
+
+  getFavArticles(emailId): Observable<any> {
+    return this.http.get(this.fetchfavArticleUrl + emailId);
+  }
+
+
 
 }

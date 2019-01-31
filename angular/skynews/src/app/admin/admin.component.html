@@ -11,23 +11,24 @@
           <form>
             <div class="form-row">
               <div *ngIf="message=='Invalid Email Id'" class="col form-group alert alert-danger" role="alert">
-                  Invalid Email Id.
+                Invalid Email Id.
               </div>
             </div>
 
             <div class="form-row">
-                <div *ngIf="blockStatus" class="col form-group alert alert-success" role="alert">
-                 User Successfully Blocked.
-                </div>
+              <div *ngIf="blockStatus" class="col form-group alert alert-success" role="alert">
+                User Successfully Blocked.
               </div>
+            </div>
             <!-- form-row end.// -->
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" class="form-control" placeholder="" #email>
+              <input type="email" class="form-control" placeholder="" [formControl]="email">
 
             </div> <!-- form-group end.// -->
             <div class="form-group">
-              <button type="submit" (click)="blockAnalyst(email.value);" class="btn btn-primary btn-block">Block Analyst</button>
+              <button type="submit" (click)="searchByEmailId();" class="btn btn-primary btn-block" data-toggle="modal"
+                data-target="#blockmodal">Search User</button>
             </div> <!-- form-group// -->
 
           </form>
@@ -41,4 +42,62 @@
   </div> <!-- row.//-->
 
 
+</div>
+
+<div  class="modal fade" id="blockmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kindy Confirm The User Details.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="!invalidEmail">
+          <div class="form-row">
+            <div *ngIf="blockStatus" class="col form-group alert alert-success" role="alert">
+              User Successfully Blocked.
+            </div>
+          </div>
+          <div class="form-row">
+            <div *ngIf="signedUp" class="col form-group alert alert-success" role="alert">
+              User Signup Successfull
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Name : {{userData.name}}</label>
+
+            </div> <!-- form-group end.// -->
+
+          </div> <!-- form-row end.// -->
+          <div class="form-group">
+            <label>Email Address : {{userData.email}}</label>
+
+          </div> <!-- form-group end.// -->
+
+
+
+          <div class="form-group">
+            <label>Language : {{userData.language.description}}</label>
+
+          </div> <!-- form-group end.// -->
+          <div class="form-group">
+            <button type="submit" (click)="blockAnalyst();" class="btn btn-success btn-block">Block Analyst</button>
+          </div> <!-- form-group// -->
+
+        </form>
+        <div class="form-row" *ngIf="invalidEmail">
+          <div class="col form-group alert alert-danger" role="alert">
+            Inavlid Email Id
+          </div>
+        </div>
+        <div class="form-group" *ngIf="invalidEmail">
+          <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal">Retry</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

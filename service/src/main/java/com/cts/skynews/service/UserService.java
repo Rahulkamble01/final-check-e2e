@@ -72,26 +72,29 @@ public class UserService {
 		return status;
 	}
 	
-	public BlockStatus blockUser(String emailId) {
-		LOGGER.info("START : Inside blockUser() method of UserService");
+	public User findUserByEmail(String emailId) {
+		LOGGER.info("START : Inside findUserByEmail() method of UserService");
 		LOGGER.debug("EmailId  :  {}", emailId);
 		BlockStatus status = new BlockStatus();
-		status.setBlocked(false);
+		
 		
 		LOGGER.debug("Email Id from client :  {}", emailId);
 
 		User user = userRepository.findUserByEmail(emailId);
-		LOGGER.debug("actualUserEmail Object :  {}", user);
-		if (user == null) {
-			LOGGER.info("Email Invalid ");
-			status.setMessage("Invalid Email Id");
-		}else{
-			user.setStatus("blocked");
-			userRepository.save(user);
-			status.setBlocked(true);
-			LOGGER.info("User Blocked  ");
-		}
-
+		LOGGER.info("END : Inside findUserByEmail() method of UserService");
+		return user;
+	}
+	
+	public BlockStatus blockUser(User user) {
+		LOGGER.info("START : Inside blockUser() method of UserService");
+		LOGGER.debug("User  :  {}", user);
+		BlockStatus status = new BlockStatus();
+		status.setBlocked(false);
+		
+		user.setStatus("blocked");
+		userRepository.save(user);
+		status.setBlocked(true);
+		LOGGER.info("User Blocked");
 		return status;
 	}
 }

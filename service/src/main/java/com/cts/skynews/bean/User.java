@@ -53,12 +53,12 @@ public class User {
 	private String status;
 	
 	@NotNull(message = "Role cannot be empty")
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "us_ro_id")
 	private Role role;
 	
 	@NotNull(message = "Language cannot be empty")
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "us_la_id")
 	private Language language;
 	

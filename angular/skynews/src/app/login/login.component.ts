@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { SignupService } from '../signup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-login',
@@ -19,19 +20,21 @@ export class LoginComponent implements OnInit {
   });
 
   login = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl(),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
-
+  isBlocked: boolean;
+  incorrectLogin: any;
   signUpStatus: any;
   signedUp: boolean;
   emailExists: boolean;
   error: any;
+  errorLogin: any;
   json: any;
   languageList: any;
   signUpUserJson: any;
   // tslint:disable-next-line:max-line-length
-  constructor(private loginService: LoginService, private signUpService: SignupService, private router: Router,private service : AuthService) { }
+  constructor(private loginService: LoginService, private signUpService: SignupService, private router: Router, private service: AuthService) { }
 
   ngOnInit() {
 
@@ -53,10 +56,20 @@ export class LoginComponent implements OnInit {
         this.service.setUserData(data.actualUser);
         this.service.setLanguageCode(data.actualUser.language.code);
         console.log(data.actualUser.language.code);
-
-        this.router.navigate(['/article']);
+        if (data.actualUser.status !== 'blocked') {
+          this.router.navigate(['/article']);
+        }
+        if (data.actualUser.status === 'blocked') {
+          this.isBlocked = true;
+          this.login.reset();
+        }
+      } else {
+        this.incorrectLogin = true;
       }
-    });
+    },
+      error => {
+        this.errorLogin = error;
+      });
   }
 
   Signup() {

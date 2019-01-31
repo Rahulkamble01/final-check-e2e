@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { environment } from './environment'
+import { environment } from './environment';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
@@ -18,13 +18,16 @@ const httpOptions = {
 export class AdminService {
 
   blockAnalystURL = environment.serviceUrlPrefix + '/user/block';
+  searchEmailById = environment.serviceUrlPrefix + '/user/search/';
 
   constructor(private http: HttpClient) { }
 
 
-
-  blockAnalyst(emailId): Observable<any> {
-    return this.http.get(this.blockAnalystURL);
+  findByEmailId(emailId): Observable<any> {
+    return this.http.get(this.searchEmailById + emailId);
+  }
+  blockAnalyst(userData): Observable<any> {
+    return this.http.post(this.blockAnalystURL, userData, httpOptions);
   }
 
 }

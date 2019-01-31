@@ -55,10 +55,10 @@ export class ArticleComponent implements OnInit {
       console.log(data);
       this.markedFavourite = data.markedFavourite;
       console.log(this.mode);
-      if (this.markedFavourite && this.mode == 'headlines') {
+      if (this.markedFavourite && this.mode === 'headlines') {
         this.favoriteArticleStatus[index] = 1;
       }
-      if (this.markedFavourite && this.mode == 'search') {
+      if (this.markedFavourite && this.mode === 'search') {
         this.searchFavoriteArticleStatus[index] = 1;
       }
       // console.log(this.favoriteArticleStatus[index]);
