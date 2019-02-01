@@ -41,9 +41,9 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/remove")
-	public void removeFavArticle(@RequestBody Article article){
-		LOGGER.info("START : Inside saveArticle() method of ArticleController");
+	public User removeFavArticle(@RequestBody Article article){
+		LOGGER.info("START : Inside removeFavArticle() method of ArticleController");
 		LOGGER.debug("Aricle Object {}",article);
-		 articleService.reomveFavouredMark(article);
+		 return articleService.reomveFavouredMark(article);
 	}
 }

@@ -3,15 +3,17 @@
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" [routerLink]="['/']">Sky News</a>
+  <a class="navbar-brand" [routerLink]="['/']">
+    <img src="https://news.sky.com/resources/sky-news-logo.png?v=1?bypass-service-worker" width="120" height="35" class="d-inline-block align-top" alt="">
+    Sky News</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="service.loggedIn">
         <a class="nav-link" [routerLink]="['/article']">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/fav']">My Favourites</a>
+      <li class="nav-item" *ngIf="service.loggedIn">
+        <a class="nav-link" [routerLink]="['/fav']" >My Favourites</a>
       </li>
       <li class="nav-item" *ngIf="service.isAdmin">
         <a class="nav-link"  [routerLink]="['/admin']" >Block Analyst</a>

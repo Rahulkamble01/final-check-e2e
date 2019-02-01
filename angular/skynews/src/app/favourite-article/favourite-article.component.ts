@@ -11,6 +11,7 @@ import { ArticleService } from '../article.service';
 export class FavouriteArticleComponent implements OnInit {
   userData: any;
   artcileList: any = [];
+  articleJson: any;
 
   constructor(private service: AuthService, private articleService: ArticleService) { }
 
@@ -21,6 +22,17 @@ export class FavouriteArticleComponent implements OnInit {
     this.articleService.getFavArticles(this.userData.email).subscribe(data => {
       this.artcileList = data.articles;
     });
+
   }
 
+
+
+  deleteFavArticle(article) {
+    this.articleJson = article;
+    this.articleJson['email'] = this.userData.email;
+    this.articleService.deleteFavouriteArticle(this.articleJson).subscribe(data => {
+      console.log(data);
+      this.artcileList = data.articles;
+    });
+  }
 }

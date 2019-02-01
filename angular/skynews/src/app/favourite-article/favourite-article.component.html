@@ -12,7 +12,7 @@
         <p class="text-center mt-3 border-bottom border-dark"> </p>
       </span>
       <div class="card-deck mt-4">
-        <span class="col-lg-4 col-sm-12 col-md-6 mb-3 col-display" *ngFor="let article of artcileList; let index = index;">
+        <span class="col-lg-4 col-sm-12 col-md-6 mb-3 col-display" *ngFor="let article of artcileList; let i = index;">
           <div class="card">
             <img class="card-img-top" src="{{article.urlToImage}}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -22,7 +22,7 @@
             </div>
             <div class="card-footer">
               <small class="text-muted"> &#x2605;{{article.publishedAt | date}}</small>
-              <!-- <span class="float-right"><i class="{{SearchmarkedFavouriteStatus(index)}}" (click)="addmarkFavourite(article,index);"></i></span> -->
+              <span class="float-right"><i class="fas fa-trash fa-2x" (click)=" deleteFavArticle(article);"></i></span>
             </div>
           </div>
         </span>

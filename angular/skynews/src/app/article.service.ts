@@ -17,6 +17,7 @@ export class ArticleService {
 
   addArticleUrl = environment.serviceUrlPrefix + '/article/save';
   fetchfavArticleUrl = environment.serviceUrlPrefix + '/article/fetchfavArticle/';
+  deleteArticleUrl = environment.serviceUrlPrefix + '/article/remove';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +30,9 @@ export class ArticleService {
     return this.http.get(this.fetchfavArticleUrl + emailId);
   }
 
+  deleteFavouriteArticle(articleDataJson): Observable<any> {
+    return this.http.post(this.deleteArticleUrl, articleDataJson, httpOptions);
+  }
 
 
 }

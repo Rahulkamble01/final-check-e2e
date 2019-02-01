@@ -13,11 +13,27 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 })
 export class LoginComponent implements OnInit {
   signup = new FormGroup({
-    name: new FormControl(),
-    email: new FormControl(),
-    password: new FormControl(),
-    language: new FormControl(),
+    name: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
+    email: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
+    password: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
+    language: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
   });
+
+  sign_up_form_validators = {
+    email: [
+      { type: 'required', message: 'Email Id is Required' },
+      { type: 'email', message: 'Please enter a valid email Id' },
+      { type: 'maxlength', message: 'Maximum Lenght allowed is 80 characters' },
+    ],
+    password: [
+      { type: 'required', message: 'Password cannot be blank' },
+      { type: 'minlength', message: 'Password must be between 6 to 18 characters' },
+      { type: 'maxlength', message: 'Password must be between 6 to 18 characters' },
+    ],
+    language: [
+      { type: 'required', message: 'Password cannot be blank' }
+    ]
+  };
 
   login = new FormGroup({
     email: new FormControl('', Validators.required),

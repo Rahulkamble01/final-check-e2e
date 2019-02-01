@@ -21,7 +21,7 @@
             <a href="{{article.url}}" class="card-text description">Read more</a>
           </div>
           <div class="card-footer">
-            <small class="text-muted"> &#x2605;{{article.publishedAt | date}}</small>
+            <small class="text-muted"><i class="far fa-calendar-alt "> </i> {{article.publishedAt | date}}</small>
             <span class="float-right"><i class="{{markedFavouriteStatus(index)}}" (click)="addmarkFavourite(article,index);"></i></span>
           </div>
         </div>
@@ -37,15 +37,15 @@
       <div class="card-deck mt-4">
         <span class="col-lg-4 col-sm-12 col-md-6 mb-3 col-display" *ngFor="let article of searchArticlesResult; let index = index;">
           <div class="card">
-            <img class="card-img-top" src="{{article.urlToImage}}" class="card-img-top" alt="...">
+            <img class="card-img-top" src="{{article.urlToImage}}"  alt="...">
             <div class="card-body">
               <h6 class="card-title">{{article.title}}</h6>
               <p class="card-text description">{{article.description}}</p>
               <a href="{{article.url}}" class="card-text description">Read more</a>
             </div>
             <div class="card-footer">
-              <small class="text-muted"> &#x2605;{{article.publishedAt | date}}</small>
-              <span class="float-right"><i class="{{SearchmarkedFavouriteStatus(index)}}" (click)="addmarkFavourite(article,index);"></i></span>
+              <small class="text-muted"><i class="far fa-calendar-alt "> </i> {{article.publishedAt | date}}</small>
+              <span class="float-right"><i class="{{searchmarkedFavouriteStatus(index)}}" (click)="addmarkFavourite(article,index);"></i></span>
             </div>
           </div>
         </span>

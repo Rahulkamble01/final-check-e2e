@@ -60,6 +60,7 @@ export class ArticleComponent implements OnInit {
         this.favoriteArticleStatus[index] = 1;
       }
       if (this.markedFavourite && this.mode === 'search') {
+        console.log('inside marking fav');
         this.searchFavoriteArticleStatus[index] = 1;
       }
       // console.log(this.favoriteArticleStatus[index]);
@@ -70,7 +71,7 @@ export class ArticleComponent implements OnInit {
     return this.favoriteArticleStatus[index] ? 'fas fa-heart favourite-marked' : 'far fa-heart favourite-unmarked';
   }
 
-  SearchmarkedFavouriteStatus(index) {
+  searchmarkedFavouriteStatus(index) {
     return this.searchFavoriteArticleStatus[index] ? 'fas fa-heart favourite-marked' : 'far fa-heart favourite-unmarked';
   }
 

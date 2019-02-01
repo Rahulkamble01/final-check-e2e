@@ -97,19 +97,25 @@ public class ArticleService {
 		return userRepository.findUserByEmail(emailId);
 	}
 
-	public void reomveFavouredMark(Article article) {
+	public User reomveFavouredMark(Article article) {
 		LOGGER.info("START : Inside reomveFavouredMark() method of ArticleService");
 		LOGGER.debug("Article Object :  {}", article);
+		LOGGER.debug("Article Title : from Artilce List : {}", article.getTitle());
 		User user = userRepository.findUserByEmail(article.getEmail());
 		LOGGER.debug("user Object :  {}", user);
 		List<Article> articles = user.getArticles();
 		for (int i = 0; i < articles.size(); i++) {
-			if (articles.listIterator().next().getTitle().equals(article.getTitle())) {
+			LOGGER.info("Iterating through article List and searching aeticle by title.!!");
+			LOGGER.debug("Article Title from Artilce List : {}", articles.get(i).getTitle());
+
+			if (articles.get(i).getTitle().equals(article.getTitle())) {
 				articles.remove(i);
+				LOGGER.info("Article found and removed from the List.");
 				break;
 			}
 		}
-		userRepository.save(user);
-		LOGGER.debug("After Saving user Object :  {}", user);
+		LOGGER.info("Saving User Object");
+		return userRepository.save(user);
+
 	}
 }
