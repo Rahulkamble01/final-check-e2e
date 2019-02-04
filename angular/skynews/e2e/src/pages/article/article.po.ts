@@ -6,15 +6,27 @@ export class ArticlePage {
         return element(by.css('h2'));
     }
 
-    sendEmailForLogin() {
-        return element(by.id('loginemail'));
+    getSearchInputField() {
+        return element(by.className('form-control mr-sm-2'));
     }
 
-    sendPasswordForLogin() {
-        return element(by.id('loginpassword'));
-    }
-    getLoginButton() {
-        return element(by.css('btn btn-primary btn-block signup-btn float-right'));
+    getSearchButton() {
+        return element(by.className('btn btn-outline-success my-2 my-sm-0 search'));
     }
 
+    getSearchArticleTitle() {
+        return element(by.id('articleSearch'));
+    }
+
+    getSearchArticlesCard() {
+        return element.all(by.id('searchArticlesList'));
+    }
+
+    getSearchArticlesCardTitles() {
+        return element.all(by.className('card-title'));
+    }
+
+    getFavouriteArticleButton() {
+        return element(by.id('favbutton'));
+    }
 }

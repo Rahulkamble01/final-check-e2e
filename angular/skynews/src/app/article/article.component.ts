@@ -52,6 +52,7 @@ export class ArticleComponent implements OnInit {
   addmarkFavourite(article, index) {
     article['email'] = this.emailId;
     console.log(article);
+    console.log(JSON.stringify(article));
     this.articleService.markFavourite(article).subscribe(data => {
       console.log(data);
       this.markedFavourite = data.markedFavourite;

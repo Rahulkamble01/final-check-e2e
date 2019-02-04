@@ -17,7 +17,7 @@ import com.cts.skynews.service.ArticleService;
 
 @RequestMapping("/article")
 @RestController
-public class ArticleController {
+public class ArticleController extends SkyNewsController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ArticleController.class);
 	

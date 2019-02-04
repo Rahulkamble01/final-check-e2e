@@ -10,7 +10,7 @@ export class SignUpPage {
         return element(by.className('btn btn-primary signup-btn'));
     }
 
-    getSubmitButton(){
+    getSubmitButton() {
         return element(by.className('btn btn-success btn-block'));
     }
     sendNameForSignUp() {
@@ -26,7 +26,7 @@ export class SignUpPage {
     }
 
     sendLanguageForSignUp() {
-        return element(by.id('loginemail'));
+        return element(by.id('signuplanguage'));
     }
 
     getLoginButton() {
@@ -35,6 +35,14 @@ export class SignUpPage {
 
     getErrorMessage() {
         return element(by.className('col form-group alert alert-danger'));
+    }
+
+    getSignupModal() {
+        return element(by.className('modal fade'));
+    }
+
+    getSignupSuccessMessage() {
+        return element(by.className('col form-group alert alert-success'));
     }
 
 }

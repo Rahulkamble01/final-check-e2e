@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "article")
@@ -24,13 +25,16 @@ public class Article {
 
 	@Column(name = "ar_author")
 	private String author;
-
+	
+	@NotNull(message = "Title cannot be empty")
 	@Column(name = "ar_title")
 	private String title;
-
+	
+	@NotNull(message = "Description cannot be empty")
 	@Column(name = "ar_description")
 	private String description;
 
+	@NotNull(message = "URL cannot be empty")
 	@Column(name = "ar_url")
 	private String url;
 

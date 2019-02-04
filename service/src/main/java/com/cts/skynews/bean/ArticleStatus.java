@@ -26,5 +26,23 @@ public class ArticleStatus {
 		this.markedFavourite = markedFavourite;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArticleStatus other = (ArticleStatus) obj;
+		if (articleExists != other.articleExists)
+			return false;
+		if (markedFavourite != other.markedFavourite)
+			return false;
+		if (saved != other.saved)
+			return false;
+		return true;
+	}
+	
 	
 }

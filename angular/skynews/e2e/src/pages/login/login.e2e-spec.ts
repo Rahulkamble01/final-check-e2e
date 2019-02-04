@@ -4,7 +4,7 @@ import { ArticlePage } from '../article/article.po';
 describe('Login page', () => {
     let page: LoginPage;
     // tslint:disable-next-line:label-position
-     let article = new ArticlePage();
+     const article = new ArticlePage();
     const EC = protractor.ExpectedConditions;
 
     beforeEach(() => {
@@ -23,7 +23,7 @@ describe('Login page', () => {
     });
 
     it('should be not be able to login if email is wrong', () => {
-        page.sendEmailForLogin().sendKeys('email@gmail.com');
+        page.sendEmailForLogin().sendKeys('emaail@gmail.com');
         page.sendPasswordForLogin().sendKeys('A123456');
         page.getLoginButton().click();
         browser.wait(EC.visibilityOf(page.getErrorMessage()));
@@ -35,6 +35,8 @@ describe('Login page', () => {
 
 // https://trailheadtechnology.com/ui-automation-testing-of-angular-apps-using-protractor-jasmine/
 // https://scotch.io/@charlieoduk/angular-end-to-end-testing507
+
+// https://coryrylan.com/blog/introduction-to-e2e-testing-with-the-angular-cli-and-protractor
 
 
 // --- Karma

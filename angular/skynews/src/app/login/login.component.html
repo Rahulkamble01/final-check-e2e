@@ -108,7 +108,7 @@
             </select>
           </div> <!-- form-group end.// -->
           <div class="form-group">
-            <button type="submit" (click)="Signup();" class="btn btn-success btn-block"> Sign Up </button>
+            <button type="submit" (click)="Signup();" [disabled]="!signup.valid"class="btn btn-success btn-block"> Sign Up </button>
           </div> <!-- form-group// -->
 
         </form>
