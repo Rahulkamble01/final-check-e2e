@@ -17,16 +17,16 @@
                 Your Account has been blocked. Please contact the adminstrator.
               </div>
               <div *ngIf="incorrectLogin" class="col form-group alert alert-danger" role="alert">
-                 Invalid Email Id or Password.
-                </div>
-              
+                Invalid Email Id or Password.
+              </div>
+
             </div>
             <!-- form-row end.// -->
             <div class="form-group">
               <label>Email Address</label>
               <input type="email" id="loginemail" class="form-control" placeholder="" formControlName="email">
             </div> <!-- form-group end.// -->
-            
+
 
             <div class="form-group">
               <label>Password</label>
@@ -86,8 +86,8 @@
               <label>Name </label>
               <input type="text" class="form-control" id="signupname" placeholder="" formControlName="name">
             </div> <!-- form-group end.// -->
-            <div *ngFor="let validation  of sign_up_form_validators.email">
-              <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('name').hasError(validation.type) && (signup.get('email').dirty || signup.get('email').touched)">{{validation.message}}</label>
+            <div *ngFor="let validation  of sign_up_form_validators.name">
+              <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('name').hasError(validation.type) && (signup.get('name').dirty || signup.get('name').touched)">{{validation.message}}</label>
             </div>
 
           </div> <!-- form-row end.// -->
@@ -104,8 +104,8 @@
             <label>Create password</label>
             <input class="form-control" type="password" id="signuppassword" formControlName="password">
           </div>
-          <div *ngFor="let validation  of sign_up_form_validators.name">
-            <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('password').hasError(validation.type) && (signup.get('email').dirty || signup.get('email').touched)">{{validation.message}}</label>
+          <div *ngFor="let validation  of sign_up_form_validators.password">
+            <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('password').hasError(validation.type) && (signup.get('password').dirty || signup.get('password').touched)">{{validation.message}}</label>
           </div>
           <div class="form-group">
             <label>Select Language</label>
@@ -115,10 +115,11 @@
             </select>
           </div> <!-- form-group end.// -->
           <div *ngFor="let validation  of sign_up_form_validators.language">
-            <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('language').hasError(validation.type) && (signup.get('email').dirty || signup.get('email').touched)">{{validation.message}}</label>
+            <label class=" form-control alert  alert-danger validation" *ngIf="signup.get('language').hasError(validation.type) && (signup.get('language').dirty || signup.get('language').touched)">{{validation.message}}</label>
           </div>
           <div class="form-group">
-            <button type="submit" (click)="Signup();" [disabled]="!signup.valid"class="btn btn-success btn-block"> Sign Up </button>
+            <button type="submit" (click)="Signup();" [disabled]="!signup.valid" class="btn btn-success btn-block">
+              Sign Up </button>
           </div> <!-- form-group// -->
 
         </form>

@@ -13,13 +13,17 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   signup = new FormGroup({
-    name: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
+    name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(80)])),
     email: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
-    password: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
-    language: new FormControl('', Validators.compose([Validators.required, Validators.email, Validators.maxLength(80)])),
+    password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(80)])),
+    language: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(80)])),
   });
 
   sign_up_form_validators = {
+    name: [
+      { type: 'required', message: 'Email Id is Required' },
+      { type: 'maxlength', message: 'Maximum Lenght allowed is 80 characters' },
+    ],
     email: [
       { type: 'required', message: 'Email Id is Required' },
       { type: 'email', message: 'Please enter a valid email Id' },
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit {
       { type: 'maxlength', message: 'Password must be between 6 to 18 characters' },
     ],
     language: [
-      { type: 'required', message: 'Password cannot be blank' }
+      { type: 'required', message: 'Please Select a langauge' }
     ]
   };
 
