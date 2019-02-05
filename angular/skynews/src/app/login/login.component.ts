@@ -4,7 +4,7 @@ import { LoginService } from '../login.service';
 import { SignupService } from '../signup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
+
 
 @Component({
   selector: 'app-login',
@@ -68,8 +68,8 @@ export class LoginComponent implements OnInit {
     this.loginService.loginUser(this.login.value).subscribe(data => {
       console.log(data);
       if (data.authenticated) {
-        this.service.login(data.actualUser);
-        this.service.setUserData(data.actualUser);
+        this.service.login(data);
+        //  this.service.setUserData(data.actualUser);
         this.service.setLanguageCode(data.actualUser.language.code);
         console.log(data.actualUser.language.code);
         if (data.actualUser.status !== 'blocked') {

@@ -17,8 +17,8 @@ const httpOptions = {
 })
 export class AdminService {
 
-  blockAnalystURL = environment.serviceUrlPrefix + '/user/block';
-  searchEmailById = environment.serviceUrlPrefix + '/user/search/';
+  blockAnalystURL = environment.serviceUrlPrefix + '/rest/admin/block';
+  searchEmailById = environment.serviceUrlPrefix + '/rest/admin/search/';
 
   constructor(private http: HttpClient) { }
 

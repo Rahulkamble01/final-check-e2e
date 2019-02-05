@@ -15,9 +15,9 @@ const httpOptions = {
 })
 export class ArticleService {
 
-  addArticleUrl = environment.serviceUrlPrefix + '/article/save';
-  fetchfavArticleUrl = environment.serviceUrlPrefix + '/article/fetchfavArticle/';
-  deleteArticleUrl = environment.serviceUrlPrefix + '/article/remove';
+  addArticleUrl = environment.serviceUrlPrefix + '/rest/article/save';
+  fetchfavArticleUrl = environment.serviceUrlPrefix + '/rest/article/fetchfavArticle/';
+  deleteArticleUrl = environment.serviceUrlPrefix + '/rest/article/remove';
 
   constructor(private http: HttpClient) { }
 

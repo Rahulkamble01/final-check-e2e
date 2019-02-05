@@ -32,7 +32,7 @@ describe('AppComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
       ],
-      providers: [{ provide: APP_BASE_HREF, USE_VALUE = "/" }]
+      providers: [{ provide: APP_BASE_HREF, USE_VALUE = '/' }]
     }).compileComponents();
   }));
 

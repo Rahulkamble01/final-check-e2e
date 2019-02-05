@@ -6,20 +6,24 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   userData: any;
+  authenticationData: any;
   loggedIn = false;
   isAdmin = false;
   code: any;
+
   constructor(private router: Router) { }
 
 
-  login(userData) {
+  login(authenticationData) {
     console.log('"Inside auth service login()"');
+    sessionStorage.clear();
     this.loggedIn = true;
-    if (userData.role.description === 'admin') {
+    this.setUserData(authenticationData.actualUser);
+    if (this.userData.role.description === 'admin') {
       this.isAdmin = true;
     }
-    sessionStorage.clear();
-    sessionStorage.setItem('currentUser', JSON.stringify(userData));
+
+    sessionStorage.setItem('currentUser', JSON.stringify(authenticationData));
 
   }
 
@@ -29,6 +33,14 @@ export class AuthService {
     sessionStorage.clear();
     sessionStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
+  }
+
+  setAuthenticationData(authenticationData) {
+    this.authenticationData = authenticationData;
+  }
+
+  getauthenticationData() {
+    return this.authenticationData;
   }
 
   setUserData(userData) {

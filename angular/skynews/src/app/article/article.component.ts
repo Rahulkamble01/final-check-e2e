@@ -17,6 +17,7 @@ export class ArticleComponent implements OnInit {
   favoriteArticleStatus: any = [];
   searchFavoriteArticleStatus: any = [];
   languageCode: any;
+  authenticationData: any;
   userData: any;
   emailId: any;
   searchedKeyWord: string;
@@ -27,7 +28,8 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
 
     //  this.languageCode = this.service.getLanguageCode();
-    this.userData = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.authenticationData = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.userData = this.authenticationData.actualUser;
     this.emailId = this.userData.email;
     this.languageCode = this.userData.language.code;
     const NewsAPI = require('newsapi');

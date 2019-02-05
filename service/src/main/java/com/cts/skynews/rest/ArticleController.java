@@ -15,7 +15,7 @@ import com.cts.skynews.bean.ArticleStatus;
 import com.cts.skynews.bean.User;
 import com.cts.skynews.service.ArticleService;
 
-@RequestMapping("/article")
+@RequestMapping("/rest/article")
 @RestController
 public class ArticleController extends SkyNewsController {
 

@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 export class HeaderComponent implements OnInit {
   loggedIn: boolean;
   userData: any;
-  constructor(private service: AuthService) { }
+  constructor(public service: AuthService) { }
 
   ngOnInit() {
     this.userData = JSON.parse(sessionStorage.getItem('currentUser'));

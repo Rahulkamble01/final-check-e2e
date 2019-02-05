@@ -5,6 +5,8 @@ public class AuthenticationStatus {
 	private boolean authenticated;
 	
 	private User actualUser;
+	
+	private String token;
 
 	public boolean isAuthenticated() {
 		return authenticated;
@@ -20,6 +22,15 @@ public class AuthenticationStatus {
 
 	public void setActualUser(User actualUser) {
 		this.actualUser = actualUser;
+	}
+	
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override
