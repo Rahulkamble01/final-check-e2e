@@ -32,6 +32,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationProvider authenticationProvider;
+    
     @Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 
