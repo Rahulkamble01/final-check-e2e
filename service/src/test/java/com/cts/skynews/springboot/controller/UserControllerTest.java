@@ -35,7 +35,7 @@ public class UserControllerTest {
 	public void addNewUser() throws Exception {
 		LOGGER.info("START : Inside Spring Boot addUser() method of UserController");
 
-		String USER_DATA = "{\"name\":\"Kiran Ravariya\"," + "\"email\":\"kiraln@gmail.com\","
+		String USER_DATA = "{\"name\":\"Kiran Ravariya\"," + "\"email\":\"kirasln@gmail.com\","
 				+ "\"password\":\"A123456\"," + "\"status\":\"active\"," + "\"language\":{\"id\":\"1\"},"
 				+ "\"role\":{\"id\":1}}";
 		LOGGER.debug("JSON Object :  {}", USER_DATA);

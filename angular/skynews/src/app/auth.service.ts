@@ -19,6 +19,7 @@ export class AuthService {
     sessionStorage.clear();
     this.loggedIn = true;
     this.setUserData(authenticationData.actualUser);
+
     if (this.userData.role.description === 'admin') {
       this.isAdmin = true;
     }
@@ -53,6 +54,10 @@ export class AuthService {
 
   setLanguageCode(code) {
     this.code = code;
+  }
+
+  setToke() {
+
   }
 
   getLanguageCode() {

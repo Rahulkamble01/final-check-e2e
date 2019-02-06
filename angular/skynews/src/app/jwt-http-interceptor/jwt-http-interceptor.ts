@@ -9,7 +9,7 @@ export class JwtInterceptor implements HttpInterceptor {
         const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         console.log('Interceter called');
         console.log(currentUser);
-        //  const re = 'https://newsapi.org/v2/everything';
+        //  const re = 'https://newsapi.org';
         const re = '/user';
         if (request.url.search(re) === -1) {
 

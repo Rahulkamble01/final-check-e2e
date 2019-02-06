@@ -35,7 +35,7 @@ public class ArticleControllerTest {
 	public void markArticleIfArticleisNew() throws Exception {
 		LOGGER.info("START : Inside Spring Boot addUser() method of UserController");
 
-		String ARTICLE_DATA = "{\"author\": null,\"title\": \"Test Articsle 2\","
+		String ARTICLE_DATA = "{\"author\": null,\"title\": \"Test Articslse 2\","
 				+ "\"description\": \"\",\"url\": \"httpswww.jpost.com/Diaspora/Julian-Edelman-is-Super-Bowl-MVP-579607\","
 				+ "   \"urlToImage\": \"httpsimages.jpost.com/image/upload/f_auto,fl_lossy/t_Article2016_ControlFaceDetect/393503\","
 				+ "\"publishedAt\": \"2019-02-04T07:22:00Z\","
